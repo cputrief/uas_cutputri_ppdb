@@ -12,11 +12,19 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
 Route::get('/', function () {
-    return view('welcome');
+    return view('contoh');
+})->middleware('auth');
+
+Route::get('/home', function () {
+    return view('home');
+})->middleware('auth');
+
+Route::get('/daftar', function () {
+    return view('contoh');
 });
+
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('contoh');
