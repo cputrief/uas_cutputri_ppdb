@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\dasboardController;
+use App\Http\Controllers\KelasController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -13,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::get('/', function () {
-    return view('contoh');
+    return view('layouts.contoh');
 })->middleware('auth');
 
 Route::get('/home', function () {
@@ -27,4 +30,8 @@ Route::get('/daftar', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('contoh');
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// dasboard
+Route::get('/dasboard', [dasboardController::class, 'index']);
+// kelas
+Route::get('/kelas', [KelasController::class, 'index']);

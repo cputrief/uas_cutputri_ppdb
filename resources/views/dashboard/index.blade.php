@@ -1,4 +1,4 @@
-@extends('layouts.template')
+@extends('layouts.contoh')
 @section('title')
     Dasboard
 @endsection
