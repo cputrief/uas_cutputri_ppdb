@@ -18,6 +18,18 @@
     <!-- Animation library for notifications   -->
     <link href="{{ asset('assets/css/animate.min.css')}}" rel="stylesheet"/>
 
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <!-- DataTables -->
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    
+    <!-- Buttons extension -->
+    <script src="https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.print.min.js"></script>
+    
+    <!-- JSZip for CSV export -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
     <!--  Paper Dashboard core CSS    -->
     <link href="{{ asset('assets/css/paper-dashboard.css')}}" rel="stylesheet"/>
 
@@ -52,7 +64,7 @@
     
         <ul class="nav">
             <li  class="@yield('active1')">
-                <a href="/">
+                <a href="/dasboard">
                     <i class="ti-panel"></i>
                     <p>Dashboard</p>
                 </a>
@@ -87,12 +99,18 @@
                     <p>Add Admin</p>
                 </a>
             </li>
-            <li class="@yield('active7')">
-                <a href="login">
+            <li class="nav-item @yield('active7')">
+                <a class="nav-link" href="{{ route('logout') }}"
+                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                     <i class="ti-shift-left"></i>
                     <p>Logout</p>
                 </a>
+            
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                    @csrf
+                </form>
             </li>
+            
         </ul>
     </div>
     </div>
@@ -141,77 +159,7 @@
 @yield('card')
 
 {{-- content table --}}
-<div class="content">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="header">
-                        <h4 class="title">Data Siswa</h4>
-                        <p class="category">Here is a Table Data Siswa</p>
-                    </div>
-                    <div class="content table-responsive table-full-width">
-                        <table class="table table-striped">
-                            <thead class="center">
-                                <th>No</th>
-                                <th>Nama Siswa</th>
-                                <th>NIK</th>
-                                <th>JK</th>
-                                <th>Alamat</th>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Sri Maharani</td>
-                                    <td>1109674539871</td>
-                                    <td>Perempuan</td>
-                                    <td>Aceh singkil</td>
-                                </tr>
-                            </tbody>
-                        </table>
-
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="col-md-12">
-                <div class="card card-plain">
-                    <div class="header">
-                        <h4 class="title">Data Guru</h4>
-                        <p class="category">Here is a Table Data Guru</p>
-                    </div>
-                    <div class="content table-responsive table-full-width">
-                        <table class="table table-hover">
-                            <thead class="center">
-                                <th>No</th>
-                                <th>Nama Guru<br>/ NIP</th>
-                                <th>JK</th>
-                                <th >Pangkat<br> Gol_Ruang</th>
-                                <th>Jenis Guru</th>
-                                <th>Alamat</th>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Ida Sari<br>09674539871</td>
-                                    <td>Perempuan</td>
-                                    <td>Pembina <br>VI-A</td>
-                                    <td>Wali Kelas</td>
-                                    <td>Aceh Singkil</td>
-                                </tr>
-                            </tbody>
-                        </table>
-
-                    </div>
-                </div>
-            </div>
-
-
-        </div>
-    </div>
-</div>
-		
+@yield('table')		
 			
 
                 
@@ -250,8 +198,25 @@
     <!-- Paper Dashboard Core javascript and methods for Demo purpose -->
 	<script src="{{ asset('assets/js/paper-dashboard.js')}}"></script>
 
-	
+    <!-- DataTables JS -->
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
 
-	
+<!-- jQuery -->
+<script src="{{ asset('asset/jquery.min.js')}}"></script>
+<!-- Bootstrap 4 -->
+<script src="{{ asset('assets/js/bootstrap.bundle.min.js')}}"></script>
+
+<!-- Buttons Extension -->
+<script src="https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.print.min.js"></script>
+
+<!-- JSZip for CSV export -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+
+<!-- Bootstrap 5 JS dan Popper -->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" crossorigin="anonymous"></script>
+
 
 </html>
