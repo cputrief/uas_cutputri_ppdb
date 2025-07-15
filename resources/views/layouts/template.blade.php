@@ -14,6 +14,7 @@
 
     <!-- Bootstrap core CSS     -->
     <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet" />
+    
 
     <!-- Animation library for notifications   -->
     <link href="{{ asset('assets/css/animate.min.css')}}" rel="stylesheet"/>
@@ -76,19 +77,19 @@
                 </a>
             </li>
             <li class="@yield('active3')">
-                <a href="guru">
+                <a href="/guru">
                     <i class="ti-view-list-alt"></i>
                     <p>Guru</p>
                 </a>
             </li>
             <li class="@yield('active4')">
-                <a href="pengumuman">
+                <a href="/pengumuman">
                     <i class="ti-announcement"></i>
                     <p>Pengumuman</p>
                 </a>
             </li>
             <li class="@yield('active5')">
-                <a href="siswa">
+                <a href="/siswa">
                     <i class="ti-pencil-alt2"></i>
                     <p>Data Siswa</p>
                 </a>
@@ -159,7 +160,9 @@
 @yield('card')
 
 {{-- content table --}}
-@yield('table')		
+@yield('table')	
+
+    
 			
 
                 
@@ -177,7 +180,7 @@
 </div>
 
 
-</body>
+
 
     <!--   Core JS Files   -->
     <script src="{{ asset('assets/js/jquery-1.10.2.js')}}" type="text/javascript"></script>
@@ -201,6 +204,7 @@
     <!-- DataTables JS -->
 <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
 
+
 <!-- jQuery -->
 <script src="{{ asset('asset/jquery.min.js')}}"></script>
 <!-- Bootstrap 4 -->
@@ -218,5 +222,6 @@
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" crossorigin="anonymous"></script>
 
+</body>
 
 </html>
