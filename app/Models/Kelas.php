@@ -8,11 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Kelas extends Model
 {
     use HasFactory;
-    // protected $table = 'kelas';
+    protected $table = 'kelas';
 
-    // public function kelas(){
-    //     return $this->belongTo(Kelas::class);
-    // }
+    public function pengumumans()
+{
+    return $this->hasMany(Pengumuman::class, 'kelas_id');
+}
 
-    // protected $fillable = ['nm_kelas', 'status'];
+
+    protected $fillable = ['nm_kelas', 'status'];
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Models\pengumuman;
 use App\Models\Siswa;
 use App\Models\Kelas; 
 use App\Models\Guru; 
@@ -17,8 +18,9 @@ class pengumumanController extends Controller
     {
         //
         $nomor = 1;
-        $pengumuman = Pengumuman::all();
-        return view('pengumuman.index', compact('pengumuman', 'nomor'));
+        $pengumumans = Pengumuman::with(['siswa', 'kelas', 'guru'])->get();
+        return view('pengumuman.index', compact('pengumumans', 'nomor'));
+        
     }
 
     /**
@@ -27,11 +29,11 @@ class pengumumanController extends Controller
     public function create()
     {
         //
-        $pengumuman = Pengumuman::all();
+        $pengumumans = Pengumuman::all();
         $siswa = Siswa::all();
         $kelas = Kelas::all();
         $guru = Guru::all();
-        return view('pengumuman.tambah', compact('pengumuman', 'siswa','kelas','guru'));
+        return view('pengumuman.tambah', compact('pengumumans', 'siswa','kelas','guru'));
     }
 
     /**
@@ -40,12 +42,12 @@ class pengumumanController extends Controller
     public function store(Request $request)
     {
         //
-        $pengumuman = new Pengumuman;
-        $pengumuman->siswa_id = $request->siswa;
-        $pengumuman->kelas_id = $request->kelas;
-        $pengumuman->guru_id = $request->guru;
-        $pengumuman->status = $request->status;
-        $pengumuman->save();
+        $pengumumans = new Pengumuman;
+        $pengumumans->siswa_id = $request->siswa_id;
+        $pengumumans->kelas_id = $request->kelas_id;
+        $pengumumans->guru_id = $request->guru_id;
+        $pengumumans->status = $request->status;
+        $pengumumans->save();
 
         return redirect('/pengumuman');
     }
@@ -65,6 +67,12 @@ class pengumumanController extends Controller
     public function edit(string $id)
     {
         //
+        $pengumumans = Pengumuman::findOrFail($id);
+        $siswa = Siswa::all();
+        $kelas = Kelas::all();
+        $guru = Guru::all();
+        return view('pengumuman.edit', compact('pengumumans', 'siswa','kelas','guru'));
+
     }
 
     /**
@@ -73,6 +81,22 @@ class pengumumanController extends Controller
     public function update(Request $request, string $id)
     {
         //
+        $request->validate([
+            'pengumumans' => 'required',
+        'siswa_id' => 'required',
+        'kelas_id' => 'required',
+        'guru_id' => 'required'
+    ]);
+
+    $pengumumans = Pengumuman::findOrFail($id);
+    $pengumumans->siswa_id = $request->siswa_id;
+    $pengumumans->kelas_id = $request->kelas_id;
+    $pengumumans->guru_id = $request->guru_id;
+    $pengumumans->status = $request->status;
+    $pengumumans->save();
+
+
+    return redirect('/pengumuman')->with('success', 'Pengumuman berhasil diupdate.');
     }
 
     /**
@@ -81,5 +105,9 @@ class pengumumanController extends Controller
     public function destroy(string $id)
     {
         //
+        $pengumumans = Pengumuman::find($id);
+        $pengumumans->delete();
+
+        return redirect('/pengumuman');
     }
 }

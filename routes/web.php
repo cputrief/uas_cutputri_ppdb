@@ -6,6 +6,7 @@ use App\Http\Controllers\dasboardController;
 use App\Http\Controllers\KelasController;
 use App\Http\Controllers\guruController;
 use App\Http\Controllers\siswaController;
+use App\Http\Controllers\pengumumanController;
 
 
 /*
@@ -57,3 +58,11 @@ Route::post('/siswa', [siswaController::class, 'store']);
 Route::get('/siswa/edit/{id}', [siswaController::class, 'edit']);
 Route::put('/siswa/{id}', [siswaController::class, 'update']);
 Route::delete('/siswa/{id}', [siswaController::class, 'destroy']);
+
+// pengumuman
+Route::get('/pengumuman', [pengumumanController::class, 'index']);
+Route::get('/pengumuman/tambah', [pengumumanController::class, 'create']);
+Route::post('/pengumuman', [pengumumanController::class, 'store']);
+Route::get('/pengumuman/edit/{id}', [pengumumanController::class, 'edit']);
+Route::put('/pengumuman/{id}', [pengumumanController::class, 'update']);
+Route::delete('/pengumuman/{id}', [pengumumanController::class, 'destroy']);

@@ -15,8 +15,8 @@ class siswaController extends Controller
     {
         //
         $nomor = 1;
-        $siswa = Siswa::all();
-        return view('siswa.index',compact('siswa','nomor'));
+        $siswas = Siswa::all();
+        return view('siswa.index',compact('siswas','nomor'));
     }
 
     /**
@@ -25,8 +25,8 @@ class siswaController extends Controller
     public function create()
     {
         //
-        $siswa = Siswa::all();
-        return view('siswa.tambah',compact('siswa'));
+        $siswas = Siswa::all();
+        return view('siswa.tambah',compact('siswas'));
         
     }
 
@@ -36,12 +36,12 @@ class siswaController extends Controller
     public function store(Request $request)
     {
         //
-        $siswa = new Siswa;
-        $siswa->nisn = $request->nisn;
-        $siswa->nm_siswa = $request->nm_siswa;
-        $siswa->jk = $request->jk;
-        $siswa->alamat = $request->alamat;
-        $siswa->save();
+        $siswas = new Siswa;
+        $siswas->nisn = $request->nisn;
+        $siswas->nm_siswa = $request->nm_siswa;
+        $siswas->jk = $request->jk;
+        $siswas->alamat = $request->alamat;
+        $siswas->save();
 
         return redirect('/siswa');
     }
@@ -60,8 +60,8 @@ class siswaController extends Controller
     public function edit(string $id)
     {
         //
-        $siswa = Siswa::find($id);
-        return view('siswa.edit',compact('siswa'));
+        $siswas = Siswa::find($id);
+        return view('siswa.edit',compact('siswas'));
     }
 
     /**
@@ -70,12 +70,12 @@ class siswaController extends Controller
     public function update(Request $request, string $id)
     {
         //
-        $siswa = Siswa::find($id);
-        $siswa->nisn = $request->nisn;
-        $siswa->nm_siswa = $request->nm_siswa;
-        $siswa->jk = $request->jk;
-        $siswa->alamat = $request->alamat;
-        $siswa->save();
+        $siswas = Siswa::find($id);
+        $siswas->nisn = $request->nisn;
+        $siswas->nm_siswa = $request->nm_siswa;
+        $siswas->jk = $request->jk;
+        $siswas->alamat = $request->alamat;
+        $siswas->save();
 
         return redirect('/siswa');
     }
@@ -86,8 +86,8 @@ class siswaController extends Controller
     public function destroy(string $id)
     {
         //
-        $siswa = Siswa::find($id);
-        $siswa->delete();
+        $siswas = Siswa::find($id);
+        $siswas->delete();
 
         return redirect('/siswa');
     }

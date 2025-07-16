@@ -18,15 +18,15 @@
         @csrf
         <div class="form-group center">
             <label for="name">NISN</label>
-            <input type="text" class="form-control" id="name" name="nisn" required>
+            <input type="text" value="{{$siswa->nisn}}" class="form-control" id="name" name="nisn" required>
         </div>
         <div class="form-group">
             <label for="email">Nama Siswa</label>
-            <input type="name" class="form-control" id="status" name="nm_siswa" required>
+            <input type="name" class="form-control" value="{{$siswa->nm_siswa}}" id="status" name="nm_siswa" required>
         </div>
         <div class="form-group">
             <label for="status">Jenis Kelamin</label>
-            <select class="form-control" id="jk" name="jk" required>
+            <select class="form-control" value="{{$siswa->jk}}" id="jk" name="jk" required>
                 <option value="">-- Jenis Kelamin --</option>
                 <option value="Perempuan">Perempuan</option>
                 <option value="Laki - Laki">Laki - Laki</option>
@@ -34,7 +34,7 @@
         </div>
         <div class="form-group">
             <label for="email">Alamat</label>
-            <input type="name" class="form-control" id="status" name="alamat" required>
+            <input type="name" class="form-control" value="{{$siswa->almat}}" id="status" name="alamat" required>
         </div>
         <button type="submit" class="btn btn-primary btn-block">Submit</button>
     </form>

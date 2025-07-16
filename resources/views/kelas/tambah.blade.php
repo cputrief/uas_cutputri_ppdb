@@ -21,8 +21,12 @@
             <input type="text" class="form-control" id="name" name="nm_kelas" required>
         </div>
         <div class="form-group">
-            <label for="email">Status:</label>
-            <input type="name" class="form-control" id="status" name="status" required>
+            <label for="status">Status:</label>
+            <select class="form-control" id="status" name="status" required>
+                <option value="">-- Pilih Status --</option>
+                <option value="Full">Full</option>
+                <option value="Not Full">Not Full</option>
+            </select>
         </div>
         <button type="submit" class="btn btn-primary btn-block">Submit</button>
     </form>

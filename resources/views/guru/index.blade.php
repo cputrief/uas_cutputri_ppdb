@@ -13,70 +13,66 @@
 @endsection
 
 @section('table')
-<div class="content">
+<div class="content center">
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
                     <div class="header">
-                        <h4 class="title">Data Siswa</h4>
-                        <p class="category">Here is a Table Data Siswa</p>
+                        <h4 class="title">Data Guru</h4>
+                        <p class="category">Here is a Table Data Kelas</p>
                     </div>
                     <div class="content table-responsive table-full-width">
+                        <a href="/guru/tambah">
+                            <button type="button" class="btn btn-primary pull-right ti-plus">Tambah Data</button>
+                        </a><br><br>
+
                         <table class="table table-striped">
-                            <thead class="center">
-                                <th>No</th>
-                                <th>Nama Guru</th>
-                                <th>NIK</th>
-                                <th>JK</th>
-                                <th>Alamat</th>
+                            <thead class="text-center">
+                                <tr>
+                                    <th>No</th>
+                                    <th>Nama Guru</th>
+                                    <th>Jenis Kelamin</th>
+                                    <th>Pangkat</th>
+                                    <th>Alamat</th>
+                                    <th>Aksi</th>
+                                </tr>
                             </thead>
                             <tbody>
-                                @forelse ($guru as $item)
+                                @forelse ($guru as $data)
                                 <tr>
-                                    <td>1</td>
-                                    <td>Sri Maharani</td>
-                                    <td>1109674539871</td>
-                                    <td>Perempuan</td>
+                                    <td>{{ $nomor++ }}</td>
+                                    <td>{{ $data->nm_guru }}</td>
+                                    <td>{{ $data->jk }}</td>
+                                    <td>{{ $data->pangkat }}</td>
+                                    <td>{{ $data->alamat }}</td>
                                     <td>
-                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                                            Launch demo modal
-                                          </button>
+                                        {{-- Tombol Edit --}}
+                                        <a href="/guru/edit/{{$data->id}}" class="btn btn-sm btn-info">
+                                            <i class="fa fa-pencil"></i> Edit
+                                        </a>
 
-                                          <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog">
-                                              <div class="modal-content">
-                                                <div class="modal-header">
-                                                  <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-                                                  <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
-                                                </div>
-                                                <div class="modal-body">
-                                                  ...
-                                                </div>
-                                                <div class="modal-footer">
-                                                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                  <button type="button" class="btn btn-primary">Save changes</button>
-                                                </div>
-                                              </div>
-                                            </div>
-                                          </div>
+                                        {{-- Tombol Hapus dengan konfirmasi JavaScript --}}
+                                        <form action="/guru/{{ $data->id }}" method="POST" style="display:inline;" onsubmit="return confirm('Yakin ingin menghapus Guru {{ $data->nm_guru }}?')">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-sm btn-danger">
+                                                <i class="fa fa-trash"></i> Hapus
+                                            </button>
+                                        </form>
                                     </td>
                                 </tr> 
                                 @empty
-                                    
+                                <tr>
+                                    <td colspan="4" class="text-center">Data Guru belum tersedia.</td>
+                                </tr>
                                 @endforelse
-                                
                             </tbody>
                         </table>
 
                     </div>
                 </div>
             </div>
-
-
-            
-
-
         </div>
     </div>
 </div>

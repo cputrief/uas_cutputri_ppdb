@@ -8,11 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Siswa extends Model
 {
     use HasFactory;
-    // protected $table = 'siswa';
+    protected $table = 'siswas';
 
-    // public function siswa(){
-    //     return $this->belongTo(Siswa::class);
-    // }
+   // Di model Siswa, kalau setiap siswa hanya punya satu pengumuman:
+public function pengumuman() {
+    return $this->hasOne(Pengumuman::class, 'siswa_id');
+}
 
-    // protected $fillable = ['nisn', 'nm_siswa', 'jk', 'alamat'];
+
+    protected $fillable = ['nisn', 'nm_siswa', 'jk', 'alamat'];
 }

@@ -8,12 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class Guru extends Model
 {
     use HasFactory;
-    // protected $table = 'guru';
+    protected $table = 'gurus';
 
-    // public function guru(){
-    //     return $this->belongTo(Guru::class);
-    // }
+    public function pengumumans()
+{
+    return $this->hasMany(Pengumuman::class, 'guru_id');
+}
 
 
-    // protected $fillable = ['nm_guru', 'nip', 'jk','pangkat', 'alamat'];
+
+    protected $fillable = ['nm_guru', 'nip', 'jk','pangkat', 'alamat'];
 }

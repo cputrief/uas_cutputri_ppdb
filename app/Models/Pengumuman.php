@@ -8,15 +8,21 @@ use Illuminate\Database\Eloquent\Model;
 class Pengumuman extends Model
 {
     use HasFactory;
-    public function siswa(){
-        return $this->hasOne(Siswa::class, 'id', 'siswa_id');
+
+    protected $table = 'pengumumans';
+
+    protected $fillable = ['siswa_id', 'kelas_id', 'guru_id', 'status'];
+
+    // ✅ Perbaikan di sini
+    public function siswa() {
+        return $this->belongsTo(Siswa::class, 'siswa_id', 'id');
     }
 
-    public function kelas(){
-        return $this->hasOne(Kelas::class, 'id', 'kelas_id');
+    public function kelas() {
+        return $this->belongsTo(Kelas::class, 'kelas_id', 'id');
     }
 
-    public function guru(){
-        return $this->hasOne(Guru::class, 'id', 'guru_id');
+    public function guru() {
+        return $this->belongsTo(Guru::class, 'guru_id', 'id');
     }
 }

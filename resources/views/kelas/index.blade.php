@@ -13,7 +13,7 @@
 @endsection
 
 @section('table')
-<div class="content">
+<div class="content center">
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
@@ -41,8 +41,10 @@
                                 <tr>
                                     <td>{{ $nomor++ }}</td>
                                     <td>{{ $data->nm_kelas }}</td>
-                                    <td>
-                                        <span class="label label-sm label-warning">{{ $data->status }}</span>
+                                    <td class="hidden-480">
+                                        <span class=" {{ $data->status == 'Full' ? 'text-success' : 'text-danger' }}">
+                                            {{ $data->status }}
+                                        </span>
                                     </td>
                                     <td>
                                         {{-- Tombol Edit --}}

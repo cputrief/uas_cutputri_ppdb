@@ -11,6 +11,8 @@
 	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width" />
 
+<!-- FontAwesome for icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
     <!-- Bootstrap core CSS     -->
     <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet" />
@@ -92,12 +94,6 @@
                 <a href="/siswa">
                     <i class="ti-pencil-alt2"></i>
                     <p>Data Siswa</p>
-                </a>
-            </li>
-            <li class="@yield('active6')">
-                <a href="add admin">
-                    <i class="ti-plus"></i>
-                    <p>Add Admin</p>
                 </a>
             </li>
             <li class="nav-item @yield('active7')">
