@@ -19,9 +19,9 @@ use App\Http\Controllers\pengumumanController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-Route::get('/', function () {
-    return view('layouts.template');
-})->middleware('auth');
+// Route::get('/', function () {
+//     return view('layouts.template');
+// })->middleware('auth');
 
 // Route::get('/home', function () {
 //     return view('home');
@@ -32,10 +32,9 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 // dasboard
-Route::get('/home', [dasboardController::class, 'index']);
-// Route::get('/dasboard', [dasboardController::class, 'index']);
+Route::get('/', [\App\Http\Controllers\dasboardController::class, 'index'])->middleware('auth');
+
 // kelas
 Route::get('/kelas', [KelasController::class, 'index']);
 Route::get('/kelas/tambah', [KelasController::class, 'create']);
