@@ -67,7 +67,7 @@
     
         <ul class="nav">
             <li  class="@yield('active1')">
-                <a href="/dasboard">
+                <a href="/home">
                     <i class="ti-panel"></i>
                     <p>Dashboard</p>
                 </a>

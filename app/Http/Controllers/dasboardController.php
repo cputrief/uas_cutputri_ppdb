@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Models\Dasboard;
-
+use App\Models\Kelas;
+use App\Models\Guru;
+use App\Models\Siswa;
+use App\Models\Pengumuman;
 class dasboardController extends Controller
 {
     /**
@@ -14,7 +17,11 @@ class dasboardController extends Controller
     public function index()
     {
         //
-        return view('dashboard.index');
+        $jumlah_kelas = Kelas::count(); // Hitung jumlah data di tabel kelas
+        $jumlah_guru = Guru::count();
+        $jumlah_siswa = Siswa::count();
+        $jumlah_pengumuman = Pengumuman::count();
+    return view('home', compact('jumlah_kelas','jumlah_guru','jumlah_siswa','jumlah_pengumuman')); // Kirim ke home.blade.php
 
     }
 

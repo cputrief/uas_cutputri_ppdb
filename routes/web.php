@@ -23,9 +23,9 @@ Route::get('/', function () {
     return view('layouts.template');
 })->middleware('auth');
 
-Route::get('/home', function () {
-    return view('dasboard');
-})->middleware('auth');
+// Route::get('/home', function () {
+//     return view('home');
+// })->middleware('auth');
 
 
 
@@ -34,7 +34,8 @@ Auth::routes();
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 // dasboard
-Route::get('/dasboard', [dasboardController::class, 'index']);
+Route::get('/home', [dasboardController::class, 'index']);
+// Route::get('/dasboard', [dasboardController::class, 'index']);
 // kelas
 Route::get('/kelas', [KelasController::class, 'index']);
 Route::get('/kelas/tambah', [KelasController::class, 'create']);
@@ -66,3 +67,10 @@ Route::post('/pengumuman', [pengumumanController::class, 'store']);
 Route::get('/pengumuman/edit/{id}', [pengumumanController::class, 'edit']);
 Route::put('/pengumuman/{id}', [pengumumanController::class, 'update']);
 Route::delete('/pengumuman/{id}', [pengumumanController::class, 'destroy']);
+
+
+Route::get('/jumlah-kelas', function () {
+    return Kelas::count();
+});
+
+

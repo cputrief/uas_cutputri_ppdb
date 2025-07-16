@@ -13,15 +13,18 @@
 @endsection
 
 @section('table')
+<!-- DataTables -->
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.dataTables.min.css">
 
 
-<div>
+<div class="content px-4">
     <h2>Pengumuman <small>Admin</small></h2><br>
 
-    <div class="d-flex justify-content-between align-items-center flex-wrap mb-3">
+    <div class="d-flex justify-content-between align-items-center flex-wrap mb-3 ">
         <div class="d-flex align-items-center flex-wrap gap-2">
             <a href="/pengumuman/tambah">
-                <button type="button" class="btn btn-success">
+                <button type="button" class="btn btn-success pull-right">
                     <i class="fa fa-plus"></i> Tambah Data
                 </button>
             </a>
@@ -61,7 +64,7 @@
                     </a>
 
                     {{-- Tombol Hapus dengan konfirmasi JavaScript --}}
-                    <form action="/pengumuman/{{ $data->id }}" method="POST" style="display:inline;" onsubmit="return confirm('Yakin ingin menghapus pengumuman {{ $data->nm_siswa }}?')">
+                    <form action="/pengumuman/{{ $data->id }}" method="POST" style="display:inline;" onsubmit="return confirm('Yakin ingin menghapus pengumuman {{ $data->siswa->nm_siswa ?? ini}}?')">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn btn-sm btn-danger">
@@ -78,6 +81,37 @@
             @endforelse
         </tbody>
     </table>
-</div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- DataTables core -->
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+
+<!-- Export & print plugins -->
+<script src="https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.flash.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.print.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $('#static-table').DataTable({
+            dom: 'Bfrtip',
+            buttons: [
+                'csv', 'excel', 'pdf', 'print'
+            ],
+            paging: true,
+            responsive: true,
+            ordering: true,
+            language: {
+                url: "//cdn.datatables.net/plug-ins/1.13.6/i18n/id.json" // Bahasa Indonesia
+            }
+        });
+    });
+    </script>
+    
+</class=>
 
 @endsection

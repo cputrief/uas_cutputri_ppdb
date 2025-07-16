@@ -30,7 +30,7 @@
                         <div class="col-xs-7">
                             <div class="numbers">
                                 <p>Kelas</p>
-                                30 
+                                <h5 id="jumlah-kelas">{{ $jumlah_kelas }}</h5>
                             </div>
                         </div>
                     </div>
@@ -43,6 +43,7 @@
                 </div>
             </div>
         </div>
+        
         <div class="col-lg-3 col-sm-6">
             <div class="card">
                 <div class="content">
@@ -55,19 +56,20 @@
                         <div class="col-xs-7">
                             <div class="numbers">
                                 <p>Guru</p>
-                                35 
+                                <h5 id="jumlah-guru">{{ $jumlah_guru }}</h5>
                             </div>
                         </div>
                     </div>
                     <div class="footer">
                         <hr />
                         <div class="stats">
-                            <i class="ti-calendar"></i> Last day
+                            <i class="ti-calendar"></i> Updated now
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
         <div class="col-lg-3 col-sm-6">
             <div class="card">
                 <div class="content">
@@ -80,19 +82,20 @@
                         <div class="col-xs-7">
                             <div class="numbers">
                                 <p>Siswa</p>
-                                23
+                                <h5 id="jumlah-siswa">{{ $jumlah_siswa }}</h5>
                             </div>
                         </div>
                     </div>
                     <div class="footer">
                         <hr />
                         <div class="stats">
-                            <i class="ti-timer"></i> In the last hour
+                            <i class="ti-timer"></i> Updated now
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
         <div class="col-lg-3 col-sm-6">
             <div class="card">
                 <div class="content">
@@ -105,7 +108,7 @@
                         <div class="col-xs-7">
                             <div class="numbers">
                                 <p>Pengumuman</p>
-                                4
+                                <h5 id="jumlah-pengumuman">{{ $jumlah_pengumuman }}</h5>
                             </div>
                         </div>
                     </div>
@@ -118,78 +121,87 @@
                 </div>
             </div>
         </div>
-    </div>
 {{-- table --}}
     <div class="content">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-md-12">
-                    <div class="card">
-                        <div class="header">
-                            <h4 class="title">Data Siswa</h4>
-                            <p class="category">Here is a Table Data Siswa</p>
-                        </div>
-                        <div class="content table-responsive table-full-width">
-                            <table class="table table-striped">
-                                <thead class="center">
-                                    <th>No</th>
-                                    <th>Nama Siswa</th>
-                                    <th>NIK</th>
-                                    <th>JK</th>
-                                    <th>Alamat</th>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Sri Maharani</td>
-                                        <td>1109674539871</td>
-                                        <td>Perempuan</td>
-                                        <td>Aceh singkil</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-    
+                <div class="row mt-4 px-4">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="header">
+                                <h4 class="title">Statistik Data</h4>
+                                <p class="category">Grafik Jumlah Data di Sistem</p>
+                            </div>
+                            <div class="content">
+                                <canvas id="dashboardChart" height="100"></canvas>
+                            </div>
                         </div>
                     </div>
                 </div>
-    
-    
-                <div class="col-md-12">
-                    <div class="card card-plain">
-                        <div class="header">
-                            <h4 class="title">Data Guru</h4>
-                            <p class="category">Here is a Table Data Guru</p>
-                        </div>
-                        <div class="content table-responsive table-full-width">
-                            <table class="table table-hover">
-                                <thead class="center">
-                                    <th>No</th>
-                                    <th>Nama Guru<br>/ NIP</th>
-                                    <th>JK</th>
-                                    <th >Pangkat<br> Gol_Ruang</th>
-                                    <th>Jenis Guru</th>
-                                    <th>Alamat</th>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Ida Sari<br>09674539871</td>
-                                        <td>Perempuan</td>
-                                        <td>Pembina <br>VI-A</td>
-                                        <td>Wali Kelas</td>
-                                        <td>Aceh Singkil</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-    
-                        </div>
-                    </div>
-                </div>
-    
+                 
     
             </div>
         </div>
     </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    function updateJumlahKelas() {
+        $.get('/jumlah-kelas', function(data) {
+            $('#jumlah-kelas').text(data);
+        });
+    }
+
+    // Jalankan setiap 5 detik
+    setInterval(updateJumlahKelas, 5000);
+    // Jalankan langsung saat load
+    updateJumlahKelas();
+</script>
+
+{{-- grafik --}}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    const ctx = document.getElementById('dashboardChart').getContext('2d');
+
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['Kelas', 'Guru', 'Siswa', 'Pengumuman'],
+            datasets: [{
+                label: 'Jumlah Data',
+                data: [
+                    {{ $jumlah_kelas }},
+                    {{ $jumlah_guru }},
+                    {{ $jumlah_siswa }},
+                    {{ $jumlah_pengumuman }}
+                ],
+                backgroundColor: [
+                    '#f39c12', '#00a65a', '#f56954', '#00c0ef'
+                ],
+                borderColor: [
+                    '#e08e0b', '#008d4c', '#d73925', '#00acd6'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            animation: {
+                duration: 1500, // waktu animasi dalam ms
+                easing: 'easeOutBounce' // efek animasi (bisa diganti)
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        stepSize: 1
+                    }
+                }
+            }
+        }
+    });
+</script>
+
+
     
 @endsection
 
