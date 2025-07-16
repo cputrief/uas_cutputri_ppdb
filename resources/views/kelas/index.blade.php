@@ -19,64 +19,58 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="header">
-                        <h4 class="title">Data Siswa</h4>
-                        <p class="category">Here is a Table Data Siswa</p>
+                        <h4 class="title">Data Kelas</h4>
+                        <p class="category">Here is a Table Data Kelas</p>
                     </div>
                     <div class="content table-responsive table-full-width">
+                        <a href="/kelas/tambah">
+                            <button type="button" class="btn btn-primary pull-right ti-plus">Tambah Data</button>
+                        </a><br><br>
+
                         <table class="table table-striped">
-                            <thead class="center">
-                                <th>No</th>
-                                <th>Nama Guru</th>
-                                <th>NIK</th>
-                                <th>JK</th>
-                                <th>Alamat</th>
+                            <thead class="text-center">
+                                <tr>
+                                    <th>No</th>
+                                    <th>Nama Kelas</th>
+                                    <th>Status</th>
+                                    <th>Aksi</th>
+                                </tr>
                             </thead>
                             <tbody>
-                                @forelse ($guru as $item)
+                                @forelse ($kelas as $data)
                                 <tr>
-                                    <td>1</td>
-                                    <td>Sri Maharani</td>
-                                    <td>1109674539871</td>
-                                    <td>Perempuan</td>
+                                    <td>{{ $nomor++ }}</td>
+                                    <td>{{ $data->nm_kelas }}</td>
                                     <td>
-                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                                            Launch demo modal
-                                          </button>
+                                        <span class="label label-sm label-warning">{{ $data->status }}</span>
+                                    </td>
+                                    <td>
+                                        {{-- Tombol Edit --}}
+                                        <a href="/kelas/edit/{{$data->id}}" class="btn btn-sm btn-info">
+                                            <i class="fa fa-pencil"></i> Edit
+                                        </a>
 
-                                          <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog">
-                                              <div class="modal-content">
-                                                <div class="modal-header">
-                                                  <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-                                                  <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
-                                                </div>
-                                                <div class="modal-body">
-                                                  ...
-                                                </div>
-                                                <div class="modal-footer">
-                                                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                  <button type="button" class="btn btn-primary">Save changes</button>
-                                                </div>
-                                              </div>
-                                            </div>
-                                          </div>
+                                        {{-- Tombol Hapus dengan konfirmasi JavaScript --}}
+                                        <form action="/kelas/{{ $data->id }}" method="POST" style="display:inline;" onsubmit="return confirm('Yakin ingin menghapus kelas {{ $data->nm_kelas }}?')">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-sm btn-danger">
+                                                <i class="fa fa-trash"></i> Hapus
+                                            </button>
+                                        </form>
                                     </td>
                                 </tr> 
                                 @empty
-                                    
+                                <tr>
+                                    <td colspan="4" class="text-center">Data kelas belum tersedia.</td>
+                                </tr>
                                 @endforelse
-                                
                             </tbody>
                         </table>
 
                     </div>
                 </div>
             </div>
-
-
-            
-
-
         </div>
     </div>
 </div>
